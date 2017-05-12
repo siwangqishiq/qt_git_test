@@ -19,12 +19,13 @@ class XLObj
 {
 public:
     XLObj(vector<Point3D> vs);
-private:
+
     vector<Point3D> mMVertex;//模型坐标
+    vector<Point3D> mRVertex;
+private:
     vector<pair<int,int>> mModeLines;//线框
     Point3D mPos;//位置
 
-    vector<Point3D> mRVertex;
 public:
     void addVertex(const Point3D p);
     void addLine(const int startIndex,const int endIndex);
@@ -35,12 +36,8 @@ public:
         mPos.z = pos_z;
     }
 
-    vector<Point3D> *getModeVertex(){
-        return &(this->mMVertex);
-    }
-
-    vector<Point3D> *getResultVertex(){
-        return &(this->mRVertex);
+    Point3D getPos(){
+        return mPos;
     }
 };//end class
 

@@ -15,6 +15,8 @@ void AppEngine::init()
 
     iniCube();
 
+    mCube->setPos(100,100,100);
+
     mRenderSteam = new XLStream();
     mRenderSteam->addRenderObj(mCube);
 }

@@ -18,10 +18,10 @@ private:
     vector<XLObj * > mRenderObjs;
 
 protected:
-    void model2WorldOr(const XLObj *obj) const;//模型坐标->世界坐标
-    void world2CamOr(const XLObj *obj) const;//世界坐标->相机坐标
-    void cam2PreOr(const XLObj *obj) const;//相机坐标->透视坐标
-    void per2ScrOr(const XLObj *obj) const;//透视坐标->屏幕坐标
+    void model2WorldOr(XLObj *obj);//模型坐标->世界坐标
+    void world2CamOr(XLObj *obj);//世界坐标->相机坐标
+    void cam2PreOr(XLObj *obj);//相机坐标->透视坐标
+    void per2ScrOr(XLObj *obj);//透视坐标->屏幕坐标
 
 public:
     XLStream();
@@ -31,7 +31,7 @@ public:
      void setCamPos(real x,real y,real z);
      void setCamAngle(real x,real y,real z);
 
-    void renderStream() const;//渲染流水线
+    void renderStream();//渲染流水线
 };
 
 #endif // XLSTREAM_H

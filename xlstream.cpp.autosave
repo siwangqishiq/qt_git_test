@@ -1,5 +1,6 @@
 #include "xlstream.h"
-
+#include "xlobj.h"
+#include <vector>
 #include <iostream>
 
 XLStream::XLStream(){
@@ -21,12 +22,12 @@ void  XLStream::setCamAngle(real x, real y, real z){
     this->cam_angle_z = z;
 }
 
-void XLStream::renderStream() const{
+void XLStream::renderStream(){
     if(mRenderObjs.empty())
         return;
 
     for(auto beg = mRenderObjs.begin();beg!=mRenderObjs.end();++beg){
-        XLObj *obj = (XLObj *)(*beg);
+        XLObj *obj = *beg;
 
         model2WorldOr(obj);
         world2CamOr(obj);
@@ -36,31 +37,41 @@ void XLStream::renderStream() const{
 }
 
 //模型坐标->世界坐标
-void XLStream::model2WorldOr(const XLObj *obj) const{
+void XLStream::model2WorldOr(XLObj *obj){
     //cout<<"mode->world"<<endl;
+    if(!obj)
+        return;
+
+    Point3D pos = obj->getPos();
+    for(size_t i = 0;i<obj->mMVertex.size(); ++i){
+        obj->mRVertex[i].x = obj->mMVertex[i].x  + pos.x;
+        obj->mRVertex[i].y = obj->mMVertex[i].y  + pos.y;
+        obj->mRVertex[i].z = obj->mMVertex[i].z  + pos.z;
+
+        //Point3D debug = obj->mRVertex[i];
+        //cout<<debug.x<<endl;
+    }
+}
+
+
+//世界坐标->相机坐标
+void XLStream::world2CamOr(XLObj *obj){
+    //cout<<"world->camera"<<endl;
     if(!obj)
         return;
 
     
 }
 
-
-//世界坐标->相机坐标
-void XLStream::world2CamOr(const XLObj *obj) const{
-    //cout<<"world->camera"<<endl;
-    if(!obj)
-        return;
-}
-
 //相机坐标->透视坐标
-void XLStream::cam2PreOr(const XLObj *obj) const{
+void XLStream::cam2PreOr(XLObj *obj) {
      // cout<<"camera->perspective"<<endl;
     if(!obj)
         return;
 }
 
 //透视坐标->屏幕坐标
-void XLStream::per2ScrOr(const XLObj *obj) const{
+void XLStream::per2ScrOr(XLObj *obj) {
      //cout<<"perspective->screen"<<endl;
     if(!obj)
         return;
