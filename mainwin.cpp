@@ -23,7 +23,8 @@ MainWin::~MainWin()
     }
 
     if(engine){
-        free(engine);
+        delete engine;
+        engine = NULL;
     }
 
 }

@@ -26,11 +26,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += main.cpp\
         mainwin.cpp \
     engine.cpp \
-    appengine.cpp
+    appengine.cpp \
+    xlstream.cpp \
+    xlobj.cpp
 
 HEADERS  += mainwin.h \
     engine.h \
-    appengine.h
+    appengine.h \
+    xlstream.h \
+    xlobj.h
 
 CONFIG += mobility
 MOBILITY = 
